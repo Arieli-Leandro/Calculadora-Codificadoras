@@ -26,8 +26,6 @@ botao_exponenciacao = tk.Button(janela, text="x^")
 botao_seno = tk.Button(janela, text="sen(x)")
 botao_cosseno = tk.Button(janela, text="cos(x)")
 botao_tangente = tk.Button(janela, text="tan(x)")
-botao_pi = tk.Button(janela, text="π")
-
 
 # Declarando os botões básicos
 botao_virgula = tk.Button(janela, text=",")
@@ -37,7 +35,6 @@ botao_igual = tk.Button(janela, text="=")
 botao_on_off = tk.Button(janela, text="ON/OFF")
 botao_del = tk.Button(janela, text="DEL")
 botao_reset = tk.Button(janela, text="RESET")
-
 
 # Posicionando o lugar que cada botão vai ficar (NÃO DEFINIDO A FUNÇÃO E NEM O TAMANHO DO BOTÃO)
 
@@ -81,7 +78,5 @@ botao_igual.grid(row=5, column=4)
 
 #Posição do botão de vírgula
 botao_virgula.grid(row=5, column=5)
-
-
 
 janela.mainloop() #Executa a página
