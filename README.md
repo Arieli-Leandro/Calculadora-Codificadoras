@@ -49,6 +49,13 @@ A calculadora possui uma interface gráfica desenvolvida com a biblioteca **Tkin
   - Suporte a números decimais, utilizando o botão da vírgula na calculadora
  
 ---
+# ⚠️Aviso
+
+Quando quiser utilizar alguma das operação unárias precisa inserir o número primeiro
+
+Exemplo: Se quiser calcular o cosseno de 0, deve ser apertado o 0 e depois o cosseno na calculadora
+
+---
 
 ## 🖥️ Tecnologias utilizadas
 
