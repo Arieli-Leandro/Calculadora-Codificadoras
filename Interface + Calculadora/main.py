@@ -5,6 +5,8 @@ import tkinter.font as tkFont
 import paleta_de_cores as cores
 import funcoes_calculadora as funcoes_matematicas
 
+
+
 calculadora = tk.Tk() #Define a janela
 calculadora.title("Calculadora") #Coloca o título da página
 
@@ -19,6 +21,7 @@ calculadora.iconbitmap("imagens/logo-com-fundo.ico")
 #Opção 3 - Logo transparente
 #Coloca o ícone da página
 #calculadora.iconbitmap("imagens/logo-sem-fundo.ico") 
+
 
 #Define o tamanho da janela
 calculadora.geometry("324x245") 
@@ -35,13 +38,17 @@ frame_grande.columnconfigure(4, minsize=3)
 frame_grande.rowconfigure(0, minsize=7)
 frame_grande.rowconfigure(2, minsize=7)
 
+
 valor_texto =StringVar()
 primeiro_numero = None
 operacao = None
 calculadora_ligada = True
 
+
+
 visor_calculadora = Label(frame_pequeno, textvariable=valor_texto, width= 26, height=2, padx=7, anchor='e', relief= FLAT, justify=RIGHT, font=("Ivy", 16, ""),bg=cores.cinza, fg=cores.branco)
 visor_calculadora.place(x=0, y=0)
+
 
 #Funções necessárias para o funcionamento da calculadora (Não precisam retornar algo, vai aparecer no visor)
 def inserir_valor(valor):
@@ -80,10 +87,10 @@ def calcular():
         case "x^":
             resultado = funcoes_matematicas.exponenciacao(primeiro_numero, segundo_numero)
         case _:
-            print("Operação inválida")
-            valor_texto.set(str("--------"))
+            valor_texto.set(str("Operações unárias não precisam do '='"))
 
     valor_texto.set(str(resultado))
+
 
 def calcula_operacoes_unarias(op):
 
@@ -107,7 +114,8 @@ def calcula_operacoes_unarias(op):
         valor_texto.set(str(resultado))
 
     except:
-        valor_texto.set("Erro")
+        valor_texto.set("Erro, primeiro insira o número e depois a operação.")
+
         
 #Função que vai ser usada na configuração do botão del
 def deletar_caractere():
@@ -138,6 +146,8 @@ def pisca_texto_final():
 
     #Vai reaparecer no visor depois de 500 milissegundos
     calculadora.after(500, pisca_texto_final)
+    
+
 
 def liga_desliga():
     global calculadora_ligada
@@ -165,6 +175,7 @@ def liga_desliga():
 
     for botao in lista_botoes:
         botao.config(state=estado_calculadora)
+
 
 # Declarando os botões referentes ao números na calculadora
 botao_9 = tk.Button(frame_grande, text="9", command=lambda: inserir_valor(9), width=4, height=1, padx=5, pady=5, relief="raised", bg=cores.cinza_claro, fg=cores.preto, font=("Ivy", 10, ""))
