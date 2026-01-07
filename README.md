@@ -15,6 +15,12 @@ Ensinar, durante as oficinas do projeto Codificadoras:
 
 ---
 
+## 📘 Versões
+
+Dentro do repositório há duas pastas, uma com o código da calculadora e outra com a implementação da interface gráfica dentro da calculadora. Podendo ser utilizado apenas o código da calculadora para oficinas mais simples e o código da calculadora com a interface para oficinas intermediárias ou para oficinas de longa duração
+
+---
+
 ## ⚙️ Como funciona
 
 A calculadora possui uma interface gráfica desenvolvida com a biblioteca **Tkinter**, permitindo que o usuário interaja com botões numéricos e operações matemáticas.
