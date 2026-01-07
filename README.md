@@ -51,8 +51,7 @@ A calculadora possui uma interface gráfica desenvolvida com a biblioteca **Tkin
 ---
 # ⚠️Aviso
 
-Quando quiser utilizar alguma das operação unárias precisa inserir o número primeiro
-
+Quando quiser utilizar alguma das operação unárias precisa inserir o número primeiro e depois a função
 Exemplo: Se quiser calcular o cosseno de 0, deve ser apertado o 0 e depois o cosseno na calculadora
 
 ---
