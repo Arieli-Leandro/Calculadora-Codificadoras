@@ -16,17 +16,16 @@ calculadora.title("Calculadora") #Coloca o título da página
 calculadora.iconbitmap("imagens/logo-com-fundo.ico") 
 
 #Define o tamanho da janela
-calculadora.geometry("350x300") 
+calculadora.geometry("324x245") 
+calculadora.resizable(width=FALSE, height=FALSE) #Impede que o usuário expanda a janela
 
 
 
 
 
 #Definindo os frames da Calculadora 
-frame_pequeno = Frame(calculadora, width= 350, height=50, bg=cores.cinza_escuro)
+frame_pequeno = Frame(calculadora, width= 350, height=50, bg=cores.cinza)
 frame_pequeno.grid(row=0, column=0)
-
-
 frame_grande = Frame(calculadora, width= 250, height=268)
 frame_grande.grid(row=1, column=0, sticky="w")
 
@@ -38,7 +37,7 @@ frame_grande.rowconfigure(2, minsize=7)
 
 valor_texto =StringVar()
 
-visor_calculadora = Label(frame_pequeno, textvariable=valor_texto, width=16, height=2, padx=7, anchor='e', relief= FLAT, justify=RIGHT, font='Ivy 18',bg=cores.cinza_escuro, fg=cores.branco)
+visor_calculadora = Label(frame_pequeno, textvariable=valor_texto, width=16, height=2, padx=7, anchor='e', relief= FLAT, justify=RIGHT, font='Ivy 18',bg=cores.cinza, fg=cores.branco)
 visor_calculadora.place(x=0, y=0)
 
 
@@ -58,23 +57,23 @@ botao_1 = tk.Button(frame_grande, text="1",width=4,height=1,padx=5,pady=5,relief
 botao_0 = tk.Button(frame_grande, text="0",width=4,height=1,padx=4,pady=4,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
 
 # Declarando os botões referentes as operações
-botao_soma = tk.Button(frame_grande, text="+",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_subtracao = tk.Button(frame_grande, text="-",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_multiplicacao = tk.Button(frame_grande,text="*",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_divisao = tk.Button(frame_grande, text="÷",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_raiz_quadrada = tk.Button(frame_grande, text="√",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_raiz_cubica = tk.Button(frame_grande, text="∛",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_exponenciacao = tk.Button(frame_grande, text="x^",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_seno = tk.Button(frame_grande, text="sen(x)",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_cosseno = tk.Button(frame_grande, text="cos(x)",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_tangente = tk.Button(frame_grande, text="tan(x)",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
+botao_soma = tk.Button(frame_grande, text="+",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_subtracao = tk.Button(frame_grande, text="-",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_multiplicacao = tk.Button(frame_grande,text="*",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_divisao = tk.Button(frame_grande, text="÷",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_raiz_quadrada = tk.Button(frame_grande, text="√",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_raiz_cubica = tk.Button(frame_grande, text="∛",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_exponenciacao = tk.Button(frame_grande, text="x^",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_seno = tk.Button(frame_grande, text="sen(x)",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_cosseno = tk.Button(frame_grande, text="cos(x)",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_tangente = tk.Button(frame_grande, text="tan(x)",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
 
 # Declarando os botões básicos
-botao_virgula = tk.Button(frame_grande, text=",",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_igual = tk.Button(frame_grande, text="=",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.cinza_claro,fg=cores.preto,font=("Ivy", 10, ""))
-botao_on_off = tk.Button(frame_grande, text="ON/OFF", relief="raised", fg=cores.preto,font=("Ivy", 10, ""))
-botao_del = tk.Button(frame_grande, text="DEL", relief="raised", fg=cores.preto,font=("Ivy", 10, ""))
-botao_reset = tk.Button(frame_grande, text="RESET", relief="raised", fg=cores.preto,font=("Ivy", 10, ""))
+botao_virgula = tk.Button(frame_grande, text=",",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_igual = tk.Button(frame_grande, text="=",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_on_off = tk.Button(frame_grande, text="ON/OFF", relief="raised",bg=cores.magenta, fg=cores.preto,font=("Ivy", 10, ""))
+botao_del = tk.Button(frame_grande, text="DEL", relief="raised", bg=cores.prata, fg=cores.preto,font=("Ivy", 10, ""))
+botao_reset = tk.Button(frame_grande, text="RESET", relief="raised", bg=cores.prata, fg=cores.preto,font=("Ivy", 10, ""))
 
 # Posicionando o lugar que cada botão vai ficar (NÃO DEFINIDO A FUNÇÃO E NEM O TAMANHO DO BOTÃO)
 
