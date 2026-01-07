@@ -11,7 +11,9 @@ Ensinar, durante as oficinas do projeto Codificadoras:
 - Lógica de programação  
 - Fundamentos da linguagem **Python**  
 - Conceitos básicos de **interfaces gráficas (GUI)** usando a bibliteca Tkinter do Python 
-- Raciocínio lógico aplicado à resolução de problemas  
+- Raciocínio lógico aplicado à resolução de problemas
+
+---
 
 ## ⚙️ Como funciona
 
@@ -37,8 +39,10 @@ A calculadora possui uma interface gráfica desenvolvida com a biblioteca **Tkin
 - Funcionalidades extras:
   - Botão **DEL** para apagar o último dígito  
   - Botão **RESET** para limpar toda a operação  
-  - Botão **ON/OFF**, que desativa a calculadora e exibe uma mensagem no visor  
-  - Suporte a números decimais  
+  - Botão **ON/OFF**, que desativa a calculadora e exibe uma mensagem no visor para avisar o usuário que a calculadora está desligada
+  - Suporte a números decimais, utilizando o botão da vírgula na calculadora
+ 
+---
 
 ## 🖥️ Tecnologias utilizadas
 
@@ -46,6 +50,8 @@ A calculadora possui uma interface gráfica desenvolvida com a biblioteca **Tkin
 - **Tkinter** (interface gráfica)
 - Biblioteca `math` para cálculos matemáticos
 - Organização visual baseada em `Frame`, `Label` e `Button`
+
+---
 
 ## 📌 Status do projeto
 
