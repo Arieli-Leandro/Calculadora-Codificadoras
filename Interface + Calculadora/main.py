@@ -5,8 +5,6 @@ import tkinter.font as tkFont
 import paleta_de_cores as cores
 import funcoes_calculadora as funcoes_matematicas
 
-
-
 calculadora = tk.Tk() #Define a janela
 calculadora.title("Calculadora") #Coloca o título da página
 
@@ -21,7 +19,6 @@ calculadora.iconbitmap("imagens/logo-com-fundo.ico")
 #Opção 3 - Logo transparente
 #Coloca o ícone da página
 #calculadora.iconbitmap("imagens/logo-sem-fundo.ico") 
-
 
 #Define o tamanho da janela
 calculadora.geometry("324x245") 
@@ -38,17 +35,13 @@ frame_grande.columnconfigure(4, minsize=3)
 frame_grande.rowconfigure(0, minsize=7)
 frame_grande.rowconfigure(2, minsize=7)
 
-
 valor_texto =StringVar()
 primeiro_numero = None
 operacao = None
 calculadora_ligada = True
 
-
-
 visor_calculadora = Label(frame_pequeno, textvariable=valor_texto, width= 26, height=2, padx=7, anchor='e', relief= FLAT, justify=RIGHT, font=("Ivy", 16, ""),bg=cores.cinza, fg=cores.branco)
 visor_calculadora.place(x=0, y=0)
-
 
 #Funções necessárias para o funcionamento da calculadora (Não precisam retornar algo, vai aparecer no visor)
 def inserir_valor(valor):
@@ -65,11 +58,11 @@ def inserir_operacao(op):
 def inserir_virgula():
     atual = valor_texto.get()
 
-    if "," not in atual:
+    if "." not in atual:
         if atual == "":
-            valor_texto.set("0,")
+            valor_texto.set("0.")
         else:
-            valor_texto.set(atual + ",")
+            valor_texto.set(atual + ".")
 
 def calcular():
     global primeiro_numero, operacao
@@ -84,24 +77,37 @@ def calcular():
             resultado = funcoes_matematicas.multiplicacao(primeiro_numero, segundo_numero)
         case "÷":
             resultado = funcoes_matematicas.divisao(primeiro_numero, segundo_numero)
-        case "√":
-            resultado = funcoes_matematicas.raiz_quadrada(primeiro_numero)
-        case "∛":
-            resultado = funcoes_matematicas.raiz_cubica(primeiro_numero)
         case "x^":
             resultado = funcoes_matematicas.exponenciacao(primeiro_numero, segundo_numero)
-        case "sen(x)":
-            resultado = funcoes_matematicas.funcao_seno(primeiro_numero)
-        case "cos(x)":
-            resultado = funcoes_matematicas.funcao_cosseno(primeiro_numero)
-        case "tan(x)":
-            resultado = funcoes_matematicas.funcao_tangente(primeiro_numero)
         case _:
             print("Operação inválida")
             valor_texto.set(str("--------"))
 
     valor_texto.set(str(resultado))
 
+def calcula_operacoes_unarias(op):
+
+    global operacao
+    operacao = op
+
+    try:
+        numero = float(valor_texto.get())
+        match operacao:
+            case "√":
+                resultado = funcoes_matematicas.raiz_quadrada(numero)
+            case "∛":
+                resultado = funcoes_matematicas.raiz_cubica(numero)
+            case "sen(x)":
+                resultado = funcoes_matematicas.funcao_seno(numero)
+            case "cos(x)":
+                resultado = funcoes_matematicas.funcao_cosseno(numero)
+            case "tan(x)":
+                resultado = funcoes_matematicas.funcao_tangente(numero)
+
+        valor_texto.set(str(resultado))
+
+    except:
+        valor_texto.set("Erro")
         
 #Função que vai ser usada na configuração do botão del
 def deletar_caractere():
@@ -132,8 +138,6 @@ def pisca_texto_final():
 
     #Vai reaparecer no visor depois de 500 milissegundos
     calculadora.after(500, pisca_texto_final)
-    
-
 
 def liga_desliga():
     global calculadora_ligada
@@ -162,7 +166,6 @@ def liga_desliga():
     for botao in lista_botoes:
         botao.config(state=estado_calculadora)
 
-
 # Declarando os botões referentes ao números na calculadora
 botao_9 = tk.Button(frame_grande, text="9", command=lambda: inserir_valor(9), width=4, height=1, padx=5, pady=5, relief="raised", bg=cores.cinza_claro, fg=cores.preto, font=("Ivy", 10, ""))
 botao_8 = tk.Button(frame_grande, text="8", command=lambda: inserir_valor(8), width=4, height=1, padx=5, pady=5, relief="raised", bg=cores.cinza_claro, fg=cores.preto, font=("Ivy", 10, ""))
@@ -188,7 +191,7 @@ botao_cosseno = tk.Button(frame_grande, text="cos(x)",width=4,height=1,padx=3,pa
 botao_tangente = tk.Button(frame_grande, text="tan(x)",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
 
 # Declarando os botões básicos
-botao_virgula = tk.Button(frame_grande, text=",",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
+botao_virgula = tk.Button(frame_grande, text=".",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
 botao_igual = tk.Button(frame_grande, text="=",width=4,height=1,padx=3,pady=5,relief="raised",bg=cores.prata,fg=cores.preto,font=("Ivy", 10, ""))
 botao_on_off = tk.Button(frame_grande, text="ON/OFF", relief="raised",bg=cores.magenta, fg=cores.preto,font=("Ivy", 10, ""))
 botao_del = tk.Button(frame_grande, text="DEL", relief="raised", bg=cores.prata, fg=cores.preto,font=("Ivy", 10, ""))
@@ -245,15 +248,17 @@ botao_virgula.grid(row=6, column=6, padx=1, pady=1,sticky="nsew")
 
 #Configurando os botões das operações matemáticas
 botao_multiplicacao.config(command=lambda: inserir_operacao("*"))
-botao_raiz_quadrada.config(command=lambda: inserir_operacao("√"))
 botao_exponenciacao.config(command=lambda: inserir_operacao("x^"))
-botao_raiz_cubica.config(command=lambda: inserir_operacao("∛"))
 botao_subtracao.config(command=lambda: inserir_operacao("-"))
-botao_tangente.config(command=lambda: inserir_operacao("tan(x)"))
-botao_cosseno.config(command=lambda: inserir_operacao("cos(x)"))
 botao_divisao.config(command=lambda: inserir_operacao("÷"))
 botao_soma.config(command=lambda: inserir_operacao("+"))
-botao_seno.config(command=lambda: inserir_operacao("sen(x)"))
+
+#Configurando os botões das operações unárias (Tem que ser uma função diferente das básicas porque elas precisam só de um número)
+botao_tangente.config(command=lambda: calcula_operacoes_unarias("tan(x)"))
+botao_raiz_quadrada.config(command=lambda: calcula_operacoes_unarias("√"))
+botao_cosseno.config(command=lambda: calcula_operacoes_unarias("cos(x)"))
+botao_raiz_cubica.config(command=lambda: calcula_operacoes_unarias("∛"))
+botao_seno.config(command=lambda: calcula_operacoes_unarias("sen(x)"))
 
 #Configurando o botão de igual
 botao_igual.config(command=calcular)
