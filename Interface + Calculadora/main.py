@@ -5,8 +5,6 @@ import tkinter.font as tkFont
 import paleta_de_cores as cores
 import funcoes_calculadora as funcoes_matematicas
 
-
-
 calculadora = tk.Tk() #Define a janela
 calculadora.title("Calculadora") #Coloca o título da página
 
@@ -21,7 +19,6 @@ calculadora.iconbitmap("imagens/logo-com-fundo.ico")
 #Opção 3 - Logo transparente
 #Coloca o ícone da página
 #calculadora.iconbitmap("imagens/logo-sem-fundo.ico") 
-
 
 #Define o tamanho da janela
 calculadora.geometry("324x245") 
@@ -38,19 +35,15 @@ frame_grande.columnconfigure(4, minsize=3)
 frame_grande.rowconfigure(0, minsize=7)
 frame_grande.rowconfigure(2, minsize=7)
 
-
-valor_texto =StringVar()
+valor_texto = StringVar()
 primeiro_numero = None
 operacao = None
 calculadora_ligada = True
 
+visor_calculadora = Label(frame_pequeno, textvariable=valor_texto, width= 26, height=2, padx=7, anchor='e', relief= FLAT, justify=RIGHT, font=("Ivy", 16, ""), bg=cores.cinza, fg=cores.branco)
+visor_calculadora.grid(row=0, column=0)
 
-
-visor_calculadora = Label(frame_pequeno, textvariable=valor_texto, width= 26, height=2, padx=7, anchor='e', relief= FLAT, justify=RIGHT, font=("Ivy", 16, ""),bg=cores.cinza, fg=cores.branco)
-visor_calculadora.place(x=0, y=0)
-
-
-#Funções necessárias para o funcionamento da calculadora (Não precisam retornar algo, vai aparecer no visor)
+#Funções necessárias para o funcionamento da calculadora (Vai aparecer no visor)
 def inserir_valor(valor):
     global valor_texto
     atual = valor_texto.get()
@@ -83,14 +76,17 @@ def calcular():
         case "*":
             resultado = funcoes_matematicas.multiplicacao(primeiro_numero, segundo_numero)
         case "÷":
-            resultado = funcoes_matematicas.divisao(primeiro_numero, segundo_numero)
+            if segundo_numero != 0:
+                resultado = funcoes_matematicas.divisao(primeiro_numero, segundo_numero)
+            else:
+                valor_texto.set("Indefinido!")
+                return
         case "x^":
             resultado = funcoes_matematicas.exponenciacao(primeiro_numero, segundo_numero)
         case _:
             valor_texto.set(str("Operações unárias não precisam do '='"))
 
     valor_texto.set(str(resultado))
-
 
 def calcula_operacoes_unarias(op):
 
@@ -116,7 +112,6 @@ def calcula_operacoes_unarias(op):
     except:
         valor_texto.set("Erro, primeiro insira o número e depois a operação.")
 
-        
 #Função que vai ser usada na configuração do botão del
 def deletar_caractere():
     atual = valor_texto.get()
@@ -129,7 +124,7 @@ def resetar():
     primeiro_numero = None
     operacao = None
 
-#Verifica_pisca_ativo precisa estar aqui (closure)
+#Verifica_pisca_ativo precisa estar aqui (quase o funcionamento de uma closure SEM RECURSÃO)
 verifica_pisca_ativo = False
 def pisca_texto_final():
     global verifica_pisca_ativo
@@ -147,8 +142,6 @@ def pisca_texto_final():
     #Vai reaparecer no visor depois de 500 milissegundos
     calculadora.after(500, pisca_texto_final)
     
-
-
 def liga_desliga():
     global calculadora_ligada
     calculadora_ligada = not calculadora_ligada
@@ -156,16 +149,12 @@ def liga_desliga():
     global verifica_pisca_ativo
 
     if calculadora_ligada == True:
-
         verifica_pisca_ativo = False
 
         valor_texto.set("")
         estado_calculadora = "normal"
-
     else:
-
         verifica_pisca_ativo = True 
-
 
         visor_calculadora.config(anchor='center', justify= CENTER, font=(tkFont.ITALIC, 13, "bold"), fg=cores.preto)
         #No valor_texto.set() tem os underscore para que ele "ajude" o justify a centralizar melhor isso no visor
@@ -175,7 +164,6 @@ def liga_desliga():
 
     for botao in lista_botoes:
         botao.config(state=estado_calculadora)
-
 
 # Declarando os botões referentes ao números na calculadora
 botao_9 = tk.Button(frame_grande, text="9", command=lambda: inserir_valor(9), width=4, height=1, padx=5, pady=5, relief="raised", bg=cores.cinza_claro, fg=cores.preto, font=("Ivy", 10, ""))
@@ -208,21 +196,12 @@ botao_on_off = tk.Button(frame_grande, text="ON/OFF", relief="raised",bg=cores.m
 botao_del = tk.Button(frame_grande, text="DEL", relief="raised", bg=cores.prata, fg=cores.preto,font=("Ivy", 10, ""))
 botao_reset = tk.Button(frame_grande, text="RESET", relief="raised", bg=cores.prata, fg=cores.preto,font=("Ivy", 10, ""))
 
-#Fazendo uma lista de botões porque vou precisar dela para fazer a função de ligare  desligar o botão
+#Fazendo uma lista de botões porque vou precisar dela para fazer a função de ligar e  desligar o botão
 lista_botoes = [botao_0, botao_1, botao_2, botao_3, botao_4, botao_5, botao_6, botao_7, botao_8, botao_9, 
                 botao_soma, botao_subtracao, botao_multiplicacao, botao_divisao, botao_exponenciacao, botao_raiz_cubica, 
                 botao_raiz_quadrada, botao_del, botao_reset, botao_virgula, botao_igual, botao_seno, botao_cosseno, botao_tangente]
 
 # Posicionando o lugar que cada botão vai ficar (NÃO DEFINIDO A FUNÇÃO E NEM O TAMANHO DO BOTÃO)
-
-#Posição do botão que ligar/desligar
-botao_on_off.grid(row=1, column=7)
-
-#Posição dos botão reset
-botao_reset.grid(row=1, column=6)
-
-#Posição do botão del
-botao_del.grid(row=1, column=5, sticky="nsew")
 
 #Posição dos números
 #Padx e Pady definem o espaçamento interno dos botões
@@ -256,6 +235,15 @@ botao_igual.grid(row=6, column=5, padx=1, pady=1,sticky="nsew")
 
 #Posição do botão de vírgula
 botao_virgula.grid(row=6, column=6, padx=1, pady=1,sticky="nsew")
+
+#Posição do botão que ligar/desligar
+botao_on_off.grid(row=1, column=7)
+
+#Posição dos botão reset
+botao_reset.grid(row=1, column=6)
+
+#Posição do botão del
+botao_del.grid(row=1, column=5, sticky="nsew")
 
 #Configurando os botões das operações matemáticas
 botao_multiplicacao.config(command=lambda: inserir_operacao("*"))
