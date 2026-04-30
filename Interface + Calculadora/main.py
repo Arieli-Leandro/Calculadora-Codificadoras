@@ -66,7 +66,13 @@ def inserir_virgula():
 
 def calcular():
     global primeiro_numero, operacao
-    segundo_numero = float(valor_texto.get())
+
+    #Foi adicionado um try except na hora de receber o segundo número, para evitar que a calculadora calcule um número com um caractere vazio (ou um None)
+    try:
+        segundo_numero = float(valor_texto.get())
+    except ValueError:
+        valor_texto.set("Erro: insira um número")
+        return
 
     match operacao:
         case "+" :
@@ -85,6 +91,7 @@ def calcular():
             resultado = funcoes_matematicas.exponenciacao(primeiro_numero, segundo_numero)
         case _:
             valor_texto.set(str("Operações unárias não precisam do '='"))
+            return
 
     valor_texto.set(str(resultado))
 
@@ -153,6 +160,8 @@ def liga_desliga():
 
         valor_texto.set("")
         estado_calculadora = "normal"
+        #Se for desligada, ao ser ligada ela restaura as fontes no visor
+        visor_calculadora.config(anchor='e', justify=RIGHT, font=("Ivy", 16, ""), fg=cores.branco)
     else:
         verifica_pisca_ativo = True 
 
