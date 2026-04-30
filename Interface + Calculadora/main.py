@@ -51,6 +51,12 @@ def inserir_valor(valor):
 
 def inserir_operacao(op):
     global primeiro_numero, operacao
+
+    #Este if, faz com que o usuário possa inserir um número negativo
+    if op == "-" and valor_texto.get() == "":
+        valor_texto.set("-")
+        return
+
     primeiro_numero = float(valor_texto.get())
     operacao = op
     valor_texto.set("")
